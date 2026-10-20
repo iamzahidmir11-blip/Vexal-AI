@@ -5,7 +5,7 @@ async function getEng(){
 if(eng)return eng;
 if(!navigator.gpu)throw new Error("Is browser me WebGPU nahi hai. Chrome update karo.");
 var W=await import("https://esm.run/@mlc-ai/web-llm");
-eng=await W.CreateMLCEngine(MODEL,{initProgressCallback:function(p){var bs=document.querySelectorAll("#m .b"),l=bs[bs.length-1];if(l&&!l.dataset.raw)l.textContent="Model load ho raha hai ("+Math.round((p.progress||0)*100)+"%) "+p.text.slice(0,60)}});
+eng=await W.CreateMLCEngine(MODEL,{initProgressCallback:function(p){var bs=document.querySelectorAll("#m .b"),l=bs[bs.length-1];if(l&&!l.dataset.raw)l.textContent="Model load ho raha hai ("+Math.round((p.progress||0)*100)+"%) "+p.text.slice(0,60)}},{context_window_size:1024});
 if(!att.length)$("at").innerHTML="";
 return eng}
 window.fetch=function(u,o){
@@ -15,7 +15,7 @@ if(o.signal)o.signal.addEventListener("abort",function(){if(eng)eng.interruptGen
 var rs=new ReadableStream({async start(ctl){
 try{var e=await getEng();var it=await e.chat.completions.create({messages:body.messages,stream:true,max_tokens:body.max_tokens||400,temperature:.3});
 for await(var ch of it){var c=(ch.choices[0]&&ch.choices[0].delta&&ch.choices[0].delta.content)||"";if(c)ctl.enqueue(enc.encode("data: "+JSON.stringify({choices:[{delta:{content:c}}]})+"\n\n"))}}
-catch(err){ctl.enqueue(enc.encode("data: "+JSON.stringify({choices:[{delta:{content:"Error: "+err.message}}]})+"\n\n"))}
+catch(err){eng=null;ctl.enqueue(enc.encode("data: "+JSON.stringify({choices:[{delta:{content:"Error: "+err.message}}]})+"\n\n"))}
 ctl.close()}});
 return Promise.resolve(new Response(rs,{status:200}))}
 })();
