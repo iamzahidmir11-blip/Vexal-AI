@@ -1,6 +1,6 @@
 (function(){
 if(/^(127\.0\.0\.1|localhost)$/.test(location.hostname))return;
-var MODEL="Qwen2.5-0.5B-Instruct-q4f16_1-MLC",eng=null,of=window.fetch;
+var MODEL="Qwen2.5-0.5B-Instruct-q4f32_1-MLC",eng=null,of=window.fetch;
 async function getEng(){
 if(eng)return eng;
 if(!navigator.gpu)throw new Error("Is browser me WebGPU nahi hai. Chrome update karo.");
