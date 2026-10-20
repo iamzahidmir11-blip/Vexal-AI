@@ -45,7 +45,7 @@ var a="",err="";setBusy(1);ctl=new AbortController();
 try{
 var mx={short:150,normal:400,detail:900}[len()];
 var msgs=[{role:"system",content:SP()}].concat(c.m.slice(-12).map(function(x){return {role:x.role,content:x.content}}));
-var r=await fetch("/v1/chat/completions",{method:"POST",signal:ctl.signal,headers:{"Content-Type":"application/json"},body:JSON.stringify({stream:true,max_tokens:mx,temperature:0.7,messages:msgs})});
+var r=await fetch("/v1/chat/completions",{method:"POST",signal:ctl.signal,headers:{"Content-Type":"application/json"},body:JSON.stringify({stream:true,max_tokens:mx,temperature:0.3,messages:msgs})});
 if(!r.ok)throw new Error("HTTP "+r.status);
 var rd=r.body.getReader(),dec=new TextDecoder(),b="";
 while(true){var q=await rd.read();if(q.done)break;b+=dec.decode(q.value,{stream:true});var L=b.split("\n");b=L.pop();

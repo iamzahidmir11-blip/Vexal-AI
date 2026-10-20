@@ -35,7 +35,7 @@ var O=[
 ["pen","Creativity","Poem, story, ideas","Mujhe ek creative poem ya chhoti kahani likh ke do."],
 ["bolt","Vexal Power","Dekho Vexal kya kar sakta hai","Batao tum kya kya kar sakte ho, 5 powerful cheezein dikhao."]
 ];
-function SP(){return "Tum Vexal AI ho, ek helpful, friendly aur neutral AI assistant. Sabke saath respect se baat karo. Greeting ke liye simple Hello ya Hi use karo. User jis bhasha me baat kare (Hindi, Hinglish ya English), usi me jawab do. Jawab chhote aur saaf rakho."+(S.p?" User ka naam "+S.p.n+".":"")+(S.mem.length?" User ke baare me yaad rakhi baatein: "+S.mem.join("; ")+".":"")}
+function SP(){return "Tum Vexal AI ho, ek helpful, friendly aur neutral AI assistant. Sabke saath respect se baat karo. Greeting ke liye simple Hello ya Hi use karo. User jis bhasha me baat kare (Hindi, Hinglish ya English), usi me jawab do. Jawab chhote aur saaf rakho. Agar kisi baat ka pakka jawab na pata ho to bolo mujhe pakka nahi pata, galat ya banaya hua jawab kabhi mat do."+(S.p?" User ka naam "+S.p.n+".":"")+(S.mem.length?" User ke baare me yaad rakhi baatein: "+S.mem.join("; ")+".":"")}
 function ap(){document.body.className=S.th}
 function setTh(x){S.th=x;ap();sv();dsb()}
 function cur(){for(var i=0;i<S.chats.length;i++)if(S.chats[i].id==S.cur)return S.chats[i];return null}
